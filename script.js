@@ -27,19 +27,26 @@ const gameFlow = (() => {
     const playerX = Player('X');
     const playerO = Player('O');
     let turn = false;
+    const tiles = document.querySelectorAll('.tile');
     //let isOver = false;
 
-    const tiles = document.querySelectorAll('.tile');
-    tiles.forEach((tile) => {
-        tile.addEventListener('click', () => {
+    const initBoard = () => {
+        tiles.forEach((tile) => {
+            tile.addEventListener('click', () => {
+                makeMove(tile);
+            });
+        });
+    }
+
+    const makeMove = (tile) => {
+        if(tile.innerHTML === ''){
             if(turn ? playerX.makeMove(tile) : playerO.makeMove(tile));
             turn = !turn;
             gameBoard.renderBoard();
-        })
-    })
-
-
-    
-    
+        }
+    }
+    return {initBoard};
 })();
+
+gameFlow.initBoard();
 
